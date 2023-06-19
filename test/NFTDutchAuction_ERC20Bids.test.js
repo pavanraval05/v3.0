@@ -47,10 +47,6 @@ describe("NFTDutchAuction_ERC20Bids", function () {
       offerPriceDecrement
     );
 
-    // await erc20Token.approve(bidder.address, 1000);
-    // // await erc20Token.approve(auction.address, 1000);
-
-    // await nfterc721Reference.approve(auction.address, nftTokenId);
     
   });
 
@@ -73,7 +69,6 @@ describe("NFTDutchAuction_ERC20Bids", function () {
     
 
     let balance = await erc20Token.balanceOf(owner.address);
-    // console.log(await erc20Token.balanceOf(owner.address), await erc20Token.balanceOf(bidder.address), await erc20Token.allowance(owner.address, bidder.address), await erc20Token.allowance(owner.address, auction.address))
     await auction.connect(bidder).bid(100);
     await expect(auction.connect(bidder).bid(1)).to.be.revertedWith("Auction has already ended")
 
@@ -88,23 +83,14 @@ describe("NFTDutchAuction_ERC20Bids", function () {
       19
     );
 
-    // await erc20Token.approve(bidder.address, 1000);
 
     await nfterc721Reference.approve(auction.address, nftTokenId);
-
-    // await erc20Token
-    // .connect(bidder)
-    // .approve(auction.address, 100);
 
     
 
     let balance = await erc20Token.balanceOf(owner.address);
-    // console.log(await erc20Token.balanceOf(owner.address), await erc20Token.balanceOf(bidder.address), await erc20Token.allowance(owner.address, bidder.address), await erc20Token.allowance(owner.address, auction.address))
     await expect(auction.connect(bidder).bid(100)).to.be.revertedWith("Bid amount accepted, but bid failed because not enough balance to transfer erc20 token");
-    // expect(await auction.connect(bidder).bid(100)).to.be.revertedWith("The bid amount sent is too low");
-    // expect(await erc20Token.balanceOf(owner.address)).to.equal(
-    //   balance.add(100)
-    // );
+   
   });
 
   it("should not allow a bidder to place a bid with low amount", async function () {
@@ -112,23 +98,15 @@ describe("NFTDutchAuction_ERC20Bids", function () {
       19
     );
 
-    // await erc20Token.approve(bidder.address, 1000);
 
     await nfterc721Reference.approve(auction.address, nftTokenId);
 
-    // await erc20Token
-    // .connect(bidder)
-    // .approve(auction.address, 100);
-
+  
     
 
     let balance = await erc20Token.balanceOf(owner.address);
-    // console.log(await erc20Token.balanceOf(owner.address), await erc20Token.balanceOf(bidder.address), await erc20Token.allowance(owner.address, bidder.address), await erc20Token.allowance(owner.address, auction.address))
     await expect(auction.connect(bidder).bid(1)).to.be.revertedWith("The bid amount sent is too low");
-    // expect(await auction.connect(bidder).bid(100)).to.be.revertedWith("The bid amount sent is too low");
-    // expect(await erc20Token.balanceOf(owner.address)).to.equal(
-    //   balance.add(100)
-    // );
+   
   });
 
   it("should not allow a bidder to place a bid when the number of blocks is more than 10 ahead", async function () {
@@ -136,7 +114,7 @@ describe("NFTDutchAuction_ERC20Bids", function () {
       19
     );
 
-    // await erc20Token.approve(bidder.address, 1000);
+    
 
     await nfterc721Reference.approve(auction.address, nftTokenId);
 
@@ -147,12 +125,8 @@ describe("NFTDutchAuction_ERC20Bids", function () {
     );
 
     let balance = await erc20Token.balanceOf(owner.address);
-    // console.log(await erc20Token.balanceOf(owner.address), await erc20Token.balanceOf(bidder.address), await erc20Token.allowance(owner.address, bidder.address), await erc20Token.allowance(owner.address, auction.address))
     await expect(auction.connect(bidder).bid(1)).to.be.revertedWith("Auction Ended");
-    // expect(await auction.connect(bidder).bid(100)).to.be.revertedWith("The bid amount sent is too low");
-    // expect(await erc20Token.balanceOf(owner.address)).to.equal(
-    //   balance.add(100)
-    // );
+    
   });
 
  

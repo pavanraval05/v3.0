@@ -68,7 +68,6 @@ contract NFTDutchAuction_ERC20Bids {
         numBlocksAuctionOpen = _numBlocksAuctionOpen;
         offerPriceDecrement = _offerPriceDecrement;
 
-        // require(nfterc721Reference.ownerOf(nftTokenId) == owner, "Nft token owner mismatch");
 
         startAtBlockNumber = block.number;
         endsAtBlockNumber = startAtBlockNumber + numBlocksAuctionOpen;
